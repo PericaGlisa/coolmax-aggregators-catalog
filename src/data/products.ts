@@ -1,0 +1,247 @@
+import plusSmallImg from "@/assets/products/plus-small.webp";
+import plusLargeImg from "@/assets/products/plus-large.webp";
+import minusSmallWhiteImg from "@/assets/products/minus-small-white.webp";
+import minusLargeWhiteImg from "@/assets/products/minus-large-white.webp";
+
+export interface Product {
+  sifra: string;
+  naziv: string;
+  temperatura: string;
+  snaga_kw: number;
+  kompresor: string;
+  napon: string;
+  ventilatori: string;
+  kondenzator: string;
+  dimenzije: string;
+  tezina?: number;
+  cena_rsd: number;
+  kategorija: "plus" | "minus";
+  slika?: string;
+  imageScale?: "small";
+}
+
+export const products: Product[] = [
+  // PLUSNI AGREGATI (MLZ serija) — 9 modela, radni opseg -10/45°C
+  {
+    sifra: "02MLZ",
+    naziv: "Agregat EKO COOLMAX -10/45°C 3,07 kW",
+    temperatura: "-10/45°C",
+    snaga_kw: 3.07,
+    kompresor: "MLZ015T4",
+    napon: "3P/380V/50Hz",
+    ventilatori: "1×450",
+    kondenzator: "5.4 kW",
+    dimenzije: "850×700×650 mm",
+    cena_rsd: 182882,
+    kategorija: "plus",
+    slika: plusSmallImg,
+    imageScale: "small",
+  },
+  {
+    sifra: "03MLZ",
+    naziv: "Agregat EKO COOLMAX -10/45°C 4,38 kW",
+    temperatura: "-10/45°C",
+    snaga_kw: 4.38,
+    kompresor: "MLZ021T4",
+    napon: "3P/380V/50Hz",
+    ventilatori: "1×450",
+    kondenzator: "7.74 kW",
+    dimenzije: "850×700×650 mm",
+    cena_rsd: 195279,
+    kategorija: "plus",
+    slika: plusSmallImg,
+    imageScale: "small",
+  },
+  {
+    sifra: "04MLZ",
+    naziv: "Agregat EKO COOLMAX -10/45°C 6,60 kW",
+    temperatura: "-10/45°C",
+    snaga_kw: 6.60,
+    kompresor: "MLZ030T4",
+    napon: "3P/380V/50Hz",
+    ventilatori: "2×450",
+    kondenzator: "9.82 kW",
+    dimenzije: "950×750×750 mm",
+    cena_rsd: 252813,
+    kategorija: "plus",
+    slika: plusLargeImg,
+  },
+  {
+    sifra: "05MLZ",
+    naziv: "Agregat EKO COOLMAX -10/45°C 7,85 kW",
+    temperatura: "-10/45°C",
+    snaga_kw: 7.85,
+    kompresor: "MLZ038T4",
+    napon: "3P/380V/50Hz",
+    ventilatori: "2×450",
+    kondenzator: "11.57 kW",
+    dimenzije: "950×750×750 mm",
+    cena_rsd: 261361,
+    kategorija: "plus",
+    slika: plusLargeImg,
+  },
+  {
+    sifra: "06MLZ",
+    naziv: "Agregat EKO COOLMAX -10/45°C 9,50 kW",
+    temperatura: "-10/45°C",
+    snaga_kw: 9.50,
+    kompresor: "MLZ045T4",
+    napon: "3P/380V/50Hz",
+    ventilatori: "2×450",
+    kondenzator: "14.2 kW",
+    dimenzije: "1050×800×850 mm",
+    cena_rsd: 276972,
+    kategorija: "plus",
+    slika: plusLargeImg,
+  },
+  {
+    sifra: "07MLZ",
+    naziv: "Agregat EKO COOLMAX -10/45°C 10,44 kW",
+    temperatura: "-10/45°C",
+    snaga_kw: 10.44,
+    kompresor: "MLZ048T4",
+    napon: "3P/380V/50Hz",
+    ventilatori: "2×450",
+    kondenzator: "15.21 kW",
+    dimenzije: "1050×800×850 mm",
+    cena_rsd: 312361,
+    kategorija: "plus",
+    slika: plusLargeImg,
+  },
+  {
+    sifra: "08MLZ",
+    naziv: "Agregat EKO COOLMAX -10/45°C 12,05 kW",
+    temperatura: "-10/45°C",
+    snaga_kw: 12.05,
+    kompresor: "MLZ058T4",
+    napon: "3P/380V/50Hz",
+    ventilatori: "2×450",
+    kondenzator: "18.56 kW",
+    dimenzije: "1150×850×950 mm",
+    cena_rsd: 348481,
+    kategorija: "plus",
+    slika: plusLargeImg,
+  },
+  {
+    sifra: "09MLZ",
+    naziv: "Agregat EKO COOLMAX -10/45°C 14,00 kW",
+    temperatura: "-10/45°C",
+    snaga_kw: 14.00,
+    kompresor: "MLZ066T4",
+    napon: "3P/380V/50Hz",
+    ventilatori: "2×500",
+    kondenzator: "19.7 kW",
+    dimenzije: "1250×900×1050 mm",
+    cena_rsd: 406663,
+    kategorija: "plus",
+    slika: plusLargeImg,
+  },
+  {
+    sifra: "10MLZ",
+    naziv: "Agregat EKO COOLMAX -10/45°C 16,09 kW",
+    temperatura: "-10/45°C",
+    snaga_kw: 16.09,
+    kompresor: "MLZ076T4",
+    napon: "3P/380V/50Hz",
+    ventilatori: "2×500",
+    kondenzator: "21.71 kW",
+    dimenzije: "1350×950×1150 mm",
+    cena_rsd: 418530,
+    kategorija: "plus",
+    slika: plusLargeImg,
+  },
+  // MINUSNI AGREGATI (EKOL serija) — 5 modela, radni opseg -25/50°C
+  {
+    sifra: "EKOL3.5",
+    naziv: "Agregat EKO COOLMAX -25/50°C 2,68 kW",
+    temperatura: "-25/50°C",
+    snaga_kw: 2.68,
+    kompresor: "DTH488LC3",
+    napon: "220V/1PH/50Hz",
+    ventilatori: "1×450",
+    kondenzator: "40 m²",
+    dimenzije: "1300×560×690 mm",
+    cena_rsd: 162326,
+    kategorija: "minus",
+    slika: minusSmallWhiteImg,
+  },
+  {
+    sifra: "EKOL04",
+    naziv: "Agregat EKO COOLMAX -25/50°C 2,77 kW",
+    temperatura: "-25/50°C",
+    snaga_kw: 2.77,
+    kompresor: "DTH590LC3",
+    napon: "3P/380V/50Hz",
+    ventilatori: "1×450",
+    kondenzator: "40 m²",
+    dimenzije: "1300×560×1310 mm",
+    cena_rsd: 158936,
+    kategorija: "minus",
+    slika: minusSmallWhiteImg,
+  },
+  {
+    sifra: "EKOL04-B",
+    naziv: "Agregat EKO COOLMAX -25/50°C 3,29 kW",
+    temperatura: "-25/50°C",
+    snaga_kw: 3.29,
+    kompresor: "DTH590LC3",
+    napon: "3P/380V/50Hz",
+    ventilatori: "1×450",
+    kondenzator: "40 m²",
+    dimenzije: "1300×560×1310 mm",
+    cena_rsd: 179067,
+    kategorija: "minus",
+    slika: minusSmallWhiteImg,
+  },
+  {
+    sifra: "EKOL05",
+    naziv: "Agregat EKO COOLMAX -25/50°C 4,20 kW",
+    temperatura: "-25/50°C",
+    snaga_kw: 4.20,
+    kompresor: "DTE752LC3",
+    napon: "3P/380V/50Hz",
+    ventilatori: "2×400",
+    kondenzator: "50 m²",
+    dimenzije: "975×360×1310 mm",
+    cena_rsd: 199411,
+    kategorija: "minus",
+    slika: minusLargeWhiteImg,
+  },
+  {
+    sifra: "EKOL06",
+    naziv: "Agregat EKO COOLMAX -25/50°C 5,10 kW",
+    temperatura: "-25/50°C",
+    snaga_kw: 5.10,
+    kompresor: "WHP19460DCC3",
+    napon: "3P/380V/50Hz",
+    ventilatori: "2×450",
+    kondenzator: "60 m²",
+    dimenzije: "1175×360×1260 mm",
+    cena_rsd: 232258,
+    kategorija: "minus",
+    slika: minusLargeWhiteImg,
+  },
+];
+
+export const standardnaOprema = [
+  "Elektro orman sa kompletnom zaštitom",
+  "Digitalni termostat",
+  "Hermetički scroll kompresor (Hitachi)",
+  "Kondenzator sa ventilatorima (Ebmpapst / Ziehl)",
+  "Solenoid ventil + filter + vizir vlage",
+  "Manometarska stanica",
+  "Zaštita visokog/niskog pritiska",
+  "Zaštita od previsoke temperature",
+  "Zaštita od smrzavanja",
+  "Sistem za odleđivanje",
+  "Pump-down sistem",
+  "Kompletno ožičenje i automatika",
+];
+
+export const formatPrice = (price: number): string => {
+  return new Intl.NumberFormat("sr-RS", {
+    style: "decimal",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(price) + " RSD";
+};
