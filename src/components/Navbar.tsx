@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Phone, Share2, Home, BookOpen, MessageCircle, ArrowRight } from "lucide-react";
+import { Menu, X, Phone, Share2, Home, BookOpen, MessageCircle, ArrowRight, Download } from "lucide-react";
 import logo from "@/assets/eko_coolmax_logo.webp";
 
 const navItems = [
@@ -9,6 +9,11 @@ const navItems = [
   { path: "/kontakt", label: "Kontakt", icon: MessageCircle },
 ];
 const siteTitle = "EKO Coolmax";
+
+type BeforeInstallPromptEvent = Event & {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
+};
 
 const handleShare = async () => {
   const shareData = {
@@ -28,6 +33,8 @@ const Navbar = () => {
   const { pathname } = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [isInstalled, setIsInstalled] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -47,6 +54,45 @@ const Navbar = () => {
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    const standaloneByMedia = window.matchMedia("(display-mode: standalone)").matches;
+    const standaloneByNavigator = "standalone" in navigator && Boolean((navigator as Navigator & { standalone?: boolean }).standalone);
+    if (standaloneByMedia || standaloneByNavigator) {
+      setIsInstalled(true);
+    }
+
+    const onBeforeInstallPrompt = (event: Event) => {
+      event.preventDefault();
+      setDeferredPrompt(event as BeforeInstallPromptEvent);
+    };
+
+    const onAppInstalled = () => {
+      setIsInstalled(true);
+      setDeferredPrompt(null);
+    };
+
+    window.addEventListener("beforeinstallprompt", onBeforeInstallPrompt);
+    window.addEventListener("appinstalled", onAppInstalled);
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", onBeforeInstallPrompt);
+      window.removeEventListener("appinstalled", onAppInstalled);
+    };
+  }, []);
+
+  const canInstall = Boolean(deferredPrompt) && !isInstalled;
+
+  const handleInstallApp = async () => {
+    if (!deferredPrompt) return;
+    await deferredPrompt.prompt();
+    const choiceResult = await deferredPrompt.userChoice;
+    if (choiceResult.outcome === "accepted") {
+      setIsInstalled(true);
+    }
+    setDeferredPrompt(null);
+    setMobileOpen(false);
+  };
 
   return (
     <>
@@ -99,6 +145,16 @@ const Navbar = () => {
               <Share2 className="h-3 w-3" />
               Podeli
             </button>
+            {canInstall && (
+              <button
+                onClick={handleInstallApp}
+                className="hidden items-center gap-1.5 rounded-lg bg-primary-foreground px-3 py-2 text-xs font-semibold text-primary transition-all duration-300 hover:bg-primary-foreground/90 lg:flex"
+                aria-label="Preuzmi katalog aplikaciju"
+              >
+                <Download className="h-3 w-3" />
+                Preuzmi katalog
+              </button>
+            )}
             <a
               href="tel:+381113757287"
               className="flex items-center gap-2 rounded-lg bg-accent/20 px-4 py-2 text-xs font-bold text-accent transition-all duration-300 hover:bg-accent/30 hover:shadow-[0_0_20px_-5px_hsl(var(--accent)/0.4)]"
@@ -209,6 +265,18 @@ const Navbar = () => {
                 </div>
                 Podeli stranicu
               </button>
+              {canInstall && (
+                <button
+                  onClick={handleInstallApp}
+                  className="flex w-full items-center gap-3 rounded-xl bg-primary-foreground px-4 py-3 text-sm font-semibold text-primary transition-all duration-200 active:scale-[0.98]"
+                  aria-label="Preuzmi katalog aplikaciju"
+                >
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
+                    <Download className="h-4 w-4" />
+                  </div>
+                  Preuzmi katalog
+                </button>
+              )}
             </div>
           </div>
         </div>
